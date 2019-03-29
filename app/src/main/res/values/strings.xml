@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">loggalApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_web_view">WebViewActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_signage_control">사이니지제어</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps2">Map</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="clear" />
+    <string name="search">Pesquisar</string>
+    <string name="googlekey">AIzaSyCqW-VLVCAVH_qON1XaTsNRgk1azLwxBwQ</string>
+    <string name="kakaoNativekey">f4b6fcf0929c22fb0ddf22fea58a757f</string>
+    <string name="kakaoRestkey">KakaoAK f14891693c4c1e9ed1ab2195e941c3dd</string>
+    <string name="kakaoJavascriptkey">79c5a9e9a6ecd88786c0522e33fe184d</string>
+    <string name="kakaoAdminkey">0abb521fbfea1e9cccf7057079e82af4</string>
+
+    <!--로그인 -->
+    <string name="hint_email">이메일</string>
+    <string name="hint_passwordOri">기존암호</string>
+    <string name="hint_password">암호</string>
+    <string name="hint_password2">암호확인</string>
+    <string name="hint_passwordnew">새암호</string>
+    <string name="hint_passwordnew2">새암호확인</string>
+    <string name="hint_name">사용자</string>
+    <string name="hint_passwordchange">암호변경</string>
+    <string name="login">로그인</string>
+    <string name="loginout">로그아웃</string>
+    <string name="memberjoin">회원가입</string>
+    <string name="register">등록</string>
+    <string name="findpassword">패스워드찾기</string>
+    <string name="tmptomail">임시패스워드 메일발송</string>
+    <string name="btn_link_to_register">회원이 아닙니다. 가입하시겠습니까?</string>
+    <string name="btn_link_to_login">이미 가입되었습니다. 로그인하세요.</string>
+    <string name="welcome">환영</string>
+    <string name="logout">로그아웃</string>
+    <string name="change_password">비밀번호변경</string>
+    <string name="old_password">이전비밀번호</string>
+    <string name="new_password">새비밀번호</string>
+    <string name="tab_banner">배너</string>
+    <string name="tab_localbox">로컬박스</string>
+    <string name="tab_localstation">로컬스테이션</string>
+    <string name="tab_myinfo">내정보</string>
+    <string name="bookmark">북마크</string>
+    <string name="title_activity_localbox_list">LocalboxListActivity</string>
+
+    <string name="ftpUserHost">ftp://106.246.255.132:27021/</string>
+    <string name="ftpUserPort">27021/</string>
+    <string name="ftpUserID">ftpfiles</string>
+    <string name="ftpUserPW">altsoft!@34</string>
+
+    <string name="filehost">https://altsoft.ze.am/files/</string>
+    <string name="aeskey">altsoftweb</string>
+</resources>
+

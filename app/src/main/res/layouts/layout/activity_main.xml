@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.altsoft.loggalapp.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <com.ss.bottomnavigation.BottomNavigation
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:elevation="6dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        app:mode="phone">
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_baseline_phone_android_24px"
+            app:unselected_tab_icon="@drawable/ic_baseline_phone_android_unselected_24px"
+            app:tab_text="@string/tab_banner"
+            style="@style/BottomNavigationTabStyle"/>
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_localbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_baseline_dock_24"
+            app:unselected_tab_icon="@drawable/ic_baseline_dock_unselected_24"
+            app:tab_text="@string/tab_localbox"
+            style="@style/BottomNavigationTabStyle"/>
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_localstation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_baseline_device_hub_24px"
+            app:unselected_tab_icon="@drawable/ic_baseline_device_hub_unselected_24px"
+            app:tab_text="@string/tab_localstation"
+            style="@style/BottomNavigationTabStyle"/>
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_myinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:tab_icon="@drawable/ic_baseline_person_primary_24px"
+            app:unselected_tab_icon="@drawable/ic_baseline_person_unselected_24px"
+            app:tab_text="@string/tab_myinfo"
+
+            style="@style/BottomNavigationTabStyle"
+            />
+    </com.ss.bottomnavigation.BottomNavigation>
+<!--
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation"></FrameLayout>
+-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_above="@id/bottom_navigation"
+        />
+    <!--Tab View Pager
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPagerMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:paddingTop="100dp"></android.support.v4.view.ViewPager>
+
+-->
+    <include layout="@layout/layoutprogress" />
+</RelativeLayout>
+
+
