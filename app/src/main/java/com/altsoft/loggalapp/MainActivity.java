@@ -94,7 +94,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             }
                         }
                     },
-                    500);
+                    700);
+
             bImgProfilLoad = false;
         }
     }
@@ -301,9 +302,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             Global.getCurrentActivity().startActivityForResult(intent, enResult.LoginRequest.getValue());
                         }
                         setVisibleButton(false, false);
-                        if (Global.getLoginInfo().isLogin()) {
+                      /*  if (Global.getLoginInfo().isLogin()) {
                             LoginInfoSet();
-                        }
+                        }*/
                         break;
                 }
 

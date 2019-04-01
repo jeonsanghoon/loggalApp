@@ -107,8 +107,9 @@ public class TabFragment_Myinfo extends BaseFragment {
                 tvUserName.setText("");
                 bottomNavigation.getTabItems().get(3).setText("내정보");
                 ImageView img_profile = view.findViewById(R.id.img_profile);
-                img_profile.setVisibility(View.GONE);
+
                 Global.getEditInfo().SetCircleImage(img_profile, null);
+                view.findViewById(R.id.btnImgPic).setVisibility(View.GONE);
                 Global.getLoginInfo().setData(null);
                 Toast.makeText(
                         Global.getCurrentActivity(),
@@ -157,7 +158,7 @@ public class TabFragment_Myinfo extends BaseFragment {
 
 
             } else {
-                Global.getEditInfo().SetCircleImage(img_profile, "");
+                //Global.getEditInfo().SetCircleImage(img_profile, "");
                 btnLogin.setVisibility(View.VISIBLE);
                 layLogined.setVisibility(View.GONE);
             }
