@@ -107,6 +107,14 @@ public class LocalBoxListViewAdapter extends BaseAdapter {
         else {
             ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.GONE);
         }
+
+        if(data.FAVORITE_YN) {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.VISIBLE);
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setImageResource(R.drawable.ic_baseline_favorite_24px);
+        }
+        else {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.GONE);
+        }
     }
     public Boolean SetDataBind(List<DEVICE_LOCATION> list) {
         return this.SetDataBind(list, false);

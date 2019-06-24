@@ -41,6 +41,13 @@
                 android:textColor="#666666"
                 />
             <ImageView
+                android:id="@+id/btnFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_baseline_favorite_border_24px" />
+            <ImageView
                 android:id="@+id/btnBookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

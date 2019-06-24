@@ -68,6 +68,14 @@ public class BannerListViewAdapter extends BaseAdapter {
         else {
             ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.GONE);
         }
+
+        if(listViewItem.FAVORITE_YN) {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.VISIBLE);
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setImageResource(R.drawable.ic_baseline_favorite_24px);
+        }
+        else {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.GONE);
+        }
         return convertView;
     }
 
@@ -91,6 +99,15 @@ public class BannerListViewAdapter extends BaseAdapter {
         }
         else {
             ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.GONE);
+        }
+
+        if(data.FAVORITE_YN){
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.VISIBLE);
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setImageResource(R.drawable.ic_baseline_favorite_24px);
+        }
+        else
+        {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.GONE);
         }
     }
 

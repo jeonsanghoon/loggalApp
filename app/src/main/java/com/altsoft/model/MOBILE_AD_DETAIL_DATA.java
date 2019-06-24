@@ -14,4 +14,6 @@ public class MOBILE_AD_DETAIL_DATA implements Serializable {
     public String CONTENT_URL;
     /// 북마크유무
     public Boolean BOOKMARK_YN;
+    /// 좋아요유무
+    public Boolean FAVORITE_YN;
 }

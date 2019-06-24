@@ -26,7 +26,15 @@
                     android:text=""
                     android:textSize="16dp"
                     android:textStyle="bold" />
-
+                <ImageButton
+                    android:id="@+id/btnFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/ic_baseline_favorite_border_24px" />
                 <ImageButton
                     android:id="@+id/btnBookmark"
                     android:layout_width="wrap_content"

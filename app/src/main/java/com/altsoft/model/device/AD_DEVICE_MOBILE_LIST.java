@@ -51,4 +51,5 @@ public class AD_DEVICE_MOBILE_LIST  implements Serializable {
     /// 공유승인상태(T_COMMON : A009) 0:미승인, 8:반려, 9:승인
     public Integer SHARE_STATUS ;
     public Boolean BANNER_BOOKMARK_YN;
+    public Boolean BANNER_FAVORITE_YN;
 }

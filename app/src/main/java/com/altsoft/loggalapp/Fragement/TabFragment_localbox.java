@@ -60,10 +60,16 @@ public class TabFragment_localbox extends BaseFragment {
                 adapter.setItem(selectedview, selectedData);
             }
 
+            if(Global.getData().LOCALBOX_FAVORITE_YN !=null) {
+                selectedData.FAVORITE_YN = Global.getData().LOCALBOX_FAVORITE_YN;
+                adapter.setItem(selectedview, selectedData);
+            }
+
         }
         selectedview = null;
         selectedData = null;
         Global.getData().LOCALBOX_BOOKMARK_YN = null;
+        Global.getData().LOCALBOX_FAVORITE_YN = null;
     }
     public void GetDeviceLocation()
     {

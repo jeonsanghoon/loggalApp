@@ -39,13 +39,7 @@ public class LocalBoxListItemAdapter extends BaseAdapter {
     }
     public void setItem(View convertView, AD_DEVICE_MOBILE_LIST data)
     {
-        if(data.BANNER_BOOKMARK_YN) {
-            ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.VISIBLE);
-            ((ImageView) convertView.findViewById(R.id.btnBookmark)).setImageResource(R.drawable.ic_baseline_bookmark_24px);
-        }
-        else {
-            ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.GONE);
-        }
+        this.BookMarkInit(convertView, data);
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -83,14 +77,28 @@ public class LocalBoxListItemAdapter extends BaseAdapter {
         }
 
         userNameView.setText(companyName);
-        if(listViewItem.BANNER_BOOKMARK_YN) {
+        this.BookMarkInit(convertView, listViewItem);
+        return convertView;
+    }
+
+    private void BookMarkInit(View convertView, AD_DEVICE_MOBILE_LIST data)
+    {
+
+        if(data.BANNER_BOOKMARK_YN) {
             ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.VISIBLE);
             ((ImageView) convertView.findViewById(R.id.btnBookmark)).setImageResource(R.drawable.ic_baseline_bookmark_24px);
         }
         else {
             ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.GONE);
         }
-        return convertView;
+
+        if(data.BANNER_FAVORITE_YN) {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.VISIBLE);
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setImageResource(R.drawable.ic_baseline_favorite_24px);
+        }
+        else {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.GONE);
+        }
     }
 
     public Boolean SetDataBind(List<AD_DEVICE_MOBILE_LIST> list) {
@@ -103,6 +111,5 @@ public class LocalBoxListItemAdapter extends BaseAdapter {
         }
         this.notifyDataSetChanged();
         return true;
-
     }
 }

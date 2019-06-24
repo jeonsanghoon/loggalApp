@@ -16,6 +16,8 @@ public class T_MEMBER_BOOKMARK implements Serializable {
     public String USER_ID;
     /// 북마크 명칭( 기본 : 유형이 1일 경우 URL, 2일경우 로컬박스명, 3일경우 광고제목)
     public String BOOKMARK_NAME;
+    /// 북마크종류(B009)  1:북마크 2:좋아요
+    public Integer BOOKMARK_KIND;
     /// 마크유형(A007) 1:웹페이지, 2:로컬박스 3:광고
     public Integer BOOKMARK_TYPE;
     /// 로컬박스코드(T_DEVICE 테이블 참조)

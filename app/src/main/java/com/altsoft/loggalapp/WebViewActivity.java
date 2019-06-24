@@ -36,6 +36,7 @@ import retrofit2.Response;
 public class WebViewActivity extends BaseActivity {
     private WebView mWebView;
     ImageButton btnBookmark ;
+    ImageButton btnFavrite ;
     Activity activity;
     MOBILE_AD_DETAIL_DATA detailData;
     @Override
@@ -57,119 +58,25 @@ public class WebViewActivity extends BaseActivity {
         doQuery(data);
 
     }
+    /**
+    * 컴포넌트 초기화
+    * @author 전상훈
+    * @version 1.0.0
+    * @since 2019-06-24 오전 10:07
+    **/
     private void ComponentInit()
     {
         btnBookmark = (ImageButton)findViewById(R.id.btnBookmark);
+        btnFavrite  = (ImageButton)findViewById(R.id.btnFavorite);
 
         if(Global.getLoginInfo().isLogin())
         {
-            btnBookmark.setVisibility(View.VISIBLE);
-            btnBookmark.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(detailData != null) {
-                        if(detailData.BOOKMARK_YN)
-                        {
-                            new AlertDialog.Builder(Global.getCurrentActivity())
-                                    //.setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setTitle("북마크")
-                                    .setMessage("북마크 취소를 하시겠습니까?")
-                                    .setPositiveButton("예", new DialogInterface.OnClickListener()
-                                    {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                            T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
-                                            Param.USER_ID = Global.getLoginInfo().USER_ID;
-                                            Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
-                                            Param.AD_CODE = detailData.AD_CODE;
-                                            Param.SAVE_MODE = "D";
-                                            Global.getCommon().ProgressShow();
-                                            Call<RTN_SAVE_DATA> call = Global.getAPIService().MemberbookmarkSave(Param);
-                                            call.enqueue(new Callback<RTN_SAVE_DATA>() {
-                                                @Override
-                                                public void onResponse(Call<RTN_SAVE_DATA> call, Response<RTN_SAVE_DATA> response) {
-                                                    Global.getCommon().ProgressHide();
-                                                    btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_border_24px);
-                                                    detailData.BOOKMARK_YN = false;
-                                                    Global.getData().BANNER_BOOKMARK_YN = false;
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<RTN_SAVE_DATA> call, Throwable t) {
-                                                    Global.getCommon().ProgressHide();
-                                                }
-                                            });
-                                            dialog.dismiss();
-                                        }
-
-                                    })
-                                    .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                            // Do nothing
-                                            dialog.dismiss();
-                                        }
-                                    })
-                                    .show();
-
-                        }
-                        else{
-                            new AlertDialog.Builder(Global.getCurrentActivity())
-                                   // .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setTitle("북마크")
-                                    .setMessage("북마크 등록을 하시겠습니까?")
-                                    .setPositiveButton("예", new DialogInterface.OnClickListener()
-                                    {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
-                                            Param.USER_ID = Global.getLoginInfo().USER_ID;
-                                            Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
-                                            Param.AD_CODE = detailData.AD_CODE;
-                                            Param.TITLE = detailData.TITLE;
-
-                                            Param.SAVE_MODE = "U";
-                                            Global.getCommon().ProgressShow();
-                                            Call<RTN_SAVE_DATA> call = Global.getAPIService().MemberbookmarkSave(Param);
-                                            call.enqueue(new Callback<RTN_SAVE_DATA>() {
-                                                @Override
-                                                public void onResponse(Call<RTN_SAVE_DATA> call, Response<RTN_SAVE_DATA> response) {
-                                                    btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_24px);
-                                                    detailData.BOOKMARK_YN = true;
-                                                    Global.getData().BANNER_BOOKMARK_YN = true;
-                                                    Global.getCommon().ProgressHide();
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<RTN_SAVE_DATA> call, Throwable t) {
-                                                    Global.getCommon().ProgressHide();
-                                                }
-                                            });
-
-                                            dialog.dismiss();
-                                        }
-
-                                    })
-                                    .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                            // Do nothing
-                                            dialog.dismiss();
-                                        }
-                                    })
-                                    .show();
-                        }
-                    }
-                }
-            });
+           this.BookmarkInit();
+           this.FavroiteInit();
         }
         else{
             btnBookmark.setVisibility(View.GONE);
+            btnFavrite.setVisibility(View.GONE);
         }
         mWebView = (WebView) findViewById(R.id.webView);
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -221,6 +128,238 @@ public class WebViewActivity extends BaseActivity {
             }
         });
     }
+
+    /**
+    * 북마크활성화
+    * @author 전상훈
+    * @version 1.0.0
+    * @since 2019-06-24 오전 10:07
+    **/
+    
+    private void BookmarkInit()
+    {
+        btnBookmark.setVisibility(View.VISIBLE);
+        btnBookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(detailData != null) {
+                    if(detailData.BOOKMARK_YN)
+                    {
+                        new AlertDialog.Builder(Global.getCurrentActivity())
+                                //.setIcon(android.R.drawable.ic_dialog_alert)
+                                .setTitle("북마크")
+                                .setMessage("북마크 취소를 하시겠습니까?")
+                                .setPositiveButton("예", new DialogInterface.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
+                                        Param.USER_ID = Global.getLoginInfo().USER_ID;
+                                        Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
+                                        Param.AD_CODE = detailData.AD_CODE;
+                                        Param.BOOKMARK_KIND = 1;
+                                        Param.SAVE_MODE = "D";
+                                        Global.getCommon().ProgressShow();
+                                        Call<RTN_SAVE_DATA> call = Global.getAPIService().MemberbookmarkSave(Param);
+                                        call.enqueue(new Callback<RTN_SAVE_DATA>() {
+                                            @Override
+                                            public void onResponse(Call<RTN_SAVE_DATA> call, Response<RTN_SAVE_DATA> response) {
+                                                Global.getCommon().ProgressHide();
+                                                btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_border_24px);
+                                                detailData.BOOKMARK_YN = false;
+                                                Global.getData().BANNER_BOOKMARK_YN = false;
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<RTN_SAVE_DATA> call, Throwable t) {
+                                                Global.getCommon().ProgressHide();
+                                            }
+                                        });
+                                        dialog.dismiss();
+                                    }
+
+                                })
+                                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        // Do nothing
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+
+                    }
+                    else{
+                        new AlertDialog.Builder(Global.getCurrentActivity())
+                                // .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setTitle("북마크")
+                                .setMessage("북마크 등록을 하시겠습니까?")
+                                .setPositiveButton("예", new DialogInterface.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
+                                        Param.USER_ID = Global.getLoginInfo().USER_ID;
+                                        Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
+                                        Param.AD_CODE = detailData.AD_CODE;
+                                        Param.TITLE = detailData.TITLE;
+
+                                        Param.SAVE_MODE = "U";
+                                        Global.getCommon().ProgressShow();
+                                        Call<RTN_SAVE_DATA> call = Global.getAPIService().MemberbookmarkSave(Param);
+                                        call.enqueue(new Callback<RTN_SAVE_DATA>() {
+                                            @Override
+                                            public void onResponse(Call<RTN_SAVE_DATA> call, Response<RTN_SAVE_DATA> response) {
+                                                btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_24px);
+                                                detailData.BOOKMARK_YN = true;
+                                                Global.getData().BANNER_BOOKMARK_YN = true;
+                                                Global.getCommon().ProgressHide();
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<RTN_SAVE_DATA> call, Throwable t) {
+                                                Global.getCommon().ProgressHide();
+                                            }
+                                        });
+
+                                        dialog.dismiss();
+                                    }
+
+                                })
+                                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        // Do nothing
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+    * 좋아요활성화
+    * @author 전상훈
+    * @version 1.0.0
+    * @since 2019-06-24 오전 10:57
+    **/
+    private void FavroiteInit()
+    {
+        btnFavrite.setVisibility(View.VISIBLE);
+        btnFavrite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(detailData != null) {
+                    if(detailData.FAVORITE_YN)
+                    {
+                        new AlertDialog.Builder(Global.getCurrentActivity())
+                                //.setIcon(android.R.drawable.ic_dialog_alert)
+                                .setTitle("좋아요")
+                                .setMessage("좋아요 취소를 하시겠습니까?")
+                                .setPositiveButton("예", new DialogInterface.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
+                                        Param.USER_ID = Global.getLoginInfo().USER_ID;
+                                        Param.BOOKMARK_KIND = 2;
+                                        Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
+                                        Param.AD_CODE = detailData.AD_CODE;
+                                        Param.SAVE_MODE = "D";
+                                        Global.getCommon().ProgressShow();
+                                        Call<RTN_SAVE_DATA> call = Global.getAPIService().MemberbookmarkSave(Param);
+                                        call.enqueue(new Callback<RTN_SAVE_DATA>() {
+                                            @Override
+                                            public void onResponse(Call<RTN_SAVE_DATA> call, Response<RTN_SAVE_DATA> response) {
+                                                Global.getCommon().ProgressHide();
+                                                btnFavrite.setImageResource(R.drawable.ic_baseline_favorite_border_24px);
+                                                detailData.FAVORITE_YN = false;
+                                                Global.getData().BANNER_FAVORITE_YN = false;
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<RTN_SAVE_DATA> call, Throwable t) {
+                                                Global.getCommon().ProgressHide();
+                                            }
+                                        });
+                                        dialog.dismiss();
+                                    }
+
+                                })
+                                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        // Do nothing
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+
+                    }
+                    else{
+                        new AlertDialog.Builder(Global.getCurrentActivity())
+                                // .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setTitle("좋아요")
+                                .setMessage("좋아요 등록을 하시겠습니까?")
+                                .setPositiveButton("예", new DialogInterface.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
+                                        Param.USER_ID = Global.getLoginInfo().USER_ID;
+                                        Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
+                                        Param.AD_CODE = detailData.AD_CODE;
+                                        Param.BOOKMARK_KIND = 2;
+                                        Param.TITLE = detailData.TITLE;
+
+                                        Param.SAVE_MODE = "U";
+                                        Global.getCommon().ProgressShow();
+                                        Call<RTN_SAVE_DATA> call = Global.getAPIService().MemberbookmarkSave(Param);
+                                        call.enqueue(new Callback<RTN_SAVE_DATA>() {
+                                            @Override
+                                            public void onResponse(Call<RTN_SAVE_DATA> call, Response<RTN_SAVE_DATA> response) {
+                                                btnFavrite.setImageResource(R.drawable.ic_baseline_favorite_24px);
+                                                detailData.FAVORITE_YN = true;
+                                                Global.getData().BANNER_FAVORITE_YN = true;
+                                                Global.getCommon().ProgressHide();
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<RTN_SAVE_DATA> call, Throwable t) {
+                                                Global.getCommon().ProgressHide();
+                                            }
+                                        });
+
+                                        dialog.dismiss();
+                                    }
+
+                                })
+                                .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        // Do nothing
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    }
+                }
+            }
+        });
+    }
     private void doQuery( T_AD data){
         MOBILE_AD_DETAIL_COND Cond = new MOBILE_AD_DETAIL_COND();
         Cond.AD_CODE = data.AD_CODE;
@@ -236,6 +375,9 @@ public class WebViewActivity extends BaseActivity {
                 mWebView.loadUrl(  detailData.CONTENT_URL);
                 if(detailData.BOOKMARK_YN)  btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_24px);
                 else btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_border_24px);
+
+                if(detailData.FAVORITE_YN)  btnFavrite.setImageResource(R.drawable.ic_baseline_favorite_24px);
+                else btnFavrite.setImageResource(R.drawable.ic_baseline_favorite_border_24px);
             }
 
             @Override

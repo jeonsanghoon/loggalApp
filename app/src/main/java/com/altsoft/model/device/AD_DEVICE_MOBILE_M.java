@@ -15,6 +15,8 @@ public class AD_DEVICE_MOBILE_M implements Serializable {
     public String DEVICE_COMPANY_NAME ;
     /// 북마크여부
     public boolean BOOKMARK_YN ;
+    /// 좋아요여부
+    public boolean FAVORITE_YN ;
     /// 로컬박스에 내배너 리스트
     public List<AD_DEVICE_MOBILE_LIST> AD_LIST ;
 }

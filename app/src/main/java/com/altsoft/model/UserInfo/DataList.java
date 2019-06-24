@@ -12,4 +12,8 @@ public class DataList {
     public List<MOBILE_SIGNAGE_LIST> signagelist;
     public Boolean BANNER_BOOKMARK_YN;
     public Boolean LOCALBOX_BOOKMARK_YN;
+
+    public Boolean BANNER_FAVORITE_YN;
+    public Boolean LOCALBOX_FAVORITE_YN;
+
 }
