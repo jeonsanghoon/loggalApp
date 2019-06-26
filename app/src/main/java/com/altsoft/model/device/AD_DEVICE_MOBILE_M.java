@@ -10,7 +10,7 @@ public class AD_DEVICE_MOBILE_M implements Serializable {
     /// 로컬박스명
     public String DEVICE_NAME ;
     /// 로컬박스 회사코드
-    public long DEVICE_COMPANY_CODE ;
+    public int DEVICE_COMPANY_CODE ;
     /// 로컬박스 회사명
     public String DEVICE_COMPANY_NAME ;
     /// 북마크여부

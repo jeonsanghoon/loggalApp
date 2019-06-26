@@ -77,10 +77,16 @@ public class TabFragment_Banner extends BaseFragment {
                 adapter.setItem(selectedview, selectedData);
             }
 
+            if(Global.getData().BANNER_FAVORITE_YN !=null) {
+                selectedData.FAVORITE_YN = Global.getData().BANNER_FAVORITE_YN;
+                adapter.setItem(selectedview, selectedData);
+            }
+
         }
         selectedview = null;
         selectedData = null;
         Global.getData().BANNER_BOOKMARK_YN = null;
+        Global.getData().BANNER_FAVORITE_YN = null;
     }
 
 

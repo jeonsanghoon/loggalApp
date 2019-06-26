@@ -79,6 +79,13 @@ public class LocalBoxListViewAdapter extends BaseAdapter {
         else {
             ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.GONE);
         }
+        if(listViewItem.FAVORITE_YN) {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.VISIBLE);
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setImageResource(R.drawable.ic_baseline_favorite_24px);
+        }
+        else {
+            ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.GONE);
+        }
         if(listViewItem.STATION_CODE ==null) {
             if (listViewItem.DISTANCE != null) {
                 Double dTmp = listViewItem.DISTANCE / 1000.00;

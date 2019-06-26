@@ -67,7 +67,7 @@ public class TabFragment_localbox extends BaseFragment {
 
         }
         selectedview = null;
-        selectedData = null;
+
         Global.getData().LOCALBOX_BOOKMARK_YN = null;
         Global.getData().LOCALBOX_FAVORITE_YN = null;
     }

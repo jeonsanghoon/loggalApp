@@ -46,6 +46,7 @@ public class LocalboxbannerListActivity extends BaseActivity {
     Integer nPageSize = 30;
     LocalBoxListItemAdapter adapter;
     private Long deviceCode;
+    private String deviceName;
     ImageView btnBookmark ;
     ImageView btnFavorite ;
     AD_DEVICE_MOBILE_M detailData;
@@ -91,16 +92,19 @@ public class LocalboxbannerListActivity extends BaseActivity {
     {
         Intent intent = getIntent();
         deviceCode =  (Long)intent.getLongExtra("DEVICE_CODE",0);
-        super.appBarInit_titleOnly(intent.getStringExtra("DEVICE_NAME"));
+        deviceName = intent.getStringExtra("DEVICE_NAME");
+        super.appBarInit_titleOnly(deviceName);
         detailData = new AD_DEVICE_MOBILE_M();
         btnBookmark = (ImageView)findViewById(R.id.btnBookmark);
-
+        btnFavorite = (ImageView)findViewById(R.id.btnFavorite);
         if(Global.getLoginInfo().isLogin())
         {
            this.BookmarkInit();
+           this.FavoriteInit();
         }
         else{
             btnBookmark.setVisibility(View.GONE);
+            btnFavorite.setVisibility(View.GONE);
         }
     }
     /**
@@ -129,7 +133,7 @@ public class LocalboxbannerListActivity extends BaseActivity {
                                         T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
                                         Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
 
-                                        Param.DEVICE_CODE = detailData.DEVICE_CODE;
+                                        Param.DEVICE_CODE = deviceCode;
 
                                         Param.SAVE_MODE = "D";
                                         Global.getCommon().ProgressShow();
@@ -176,8 +180,9 @@ public class LocalboxbannerListActivity extends BaseActivity {
                                         T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
                                         Param.USER_ID = Global.getLoginInfo().USER_ID;
                                         Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
-                                        Param.DEVICE_CODE = detailData.DEVICE_CODE;
-                                        Param.TITLE = detailData.DEVICE_NAME;
+                                        Param.DEVICE_CODE = deviceCode;
+                                        Param.BOOKMARK_NAME = deviceName;
+                                        Param.TITLE = deviceName;
 
                                         Param.SAVE_MODE = "U";
                                         Global.getCommon().ProgressShow();
@@ -224,8 +229,8 @@ public class LocalboxbannerListActivity extends BaseActivity {
      * @since 2019-06-24 오후 3:04
      **/
     private void FavoriteInit(){
-        btnBookmark.setVisibility(View.VISIBLE);
-        btnBookmark.setOnClickListener(new View.OnClickListener() {
+        btnFavorite.setVisibility(View.VISIBLE);
+        btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(detailData != null) {
@@ -243,7 +248,7 @@ public class LocalboxbannerListActivity extends BaseActivity {
                                         T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
                                         Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
 
-                                        Param.DEVICE_CODE = detailData.DEVICE_CODE;
+                                        Param.DEVICE_CODE = deviceCode;
                                         Param.BOOKMARK_KIND = 2;
                                         Param.SAVE_MODE = "D";
                                         Global.getCommon().ProgressShow();
@@ -289,8 +294,10 @@ public class LocalboxbannerListActivity extends BaseActivity {
                                         T_MEMBER_BOOKMARK Param = new T_MEMBER_BOOKMARK();
                                         Param.USER_ID = Global.getLoginInfo().USER_ID;
                                         Param.USER_ID = Global.getSecurityInfo().EncryptAes(Global.getLoginInfo().USER_ID);
-                                        Param.DEVICE_CODE = detailData.DEVICE_CODE;
-                                        Param.TITLE = detailData.DEVICE_NAME;
+                                        Param.DEVICE_CODE = deviceCode;
+                                        Param.TITLE = deviceName;
+                                        Param.BOOKMARK_NAME = deviceName;
+
                                         Param.BOOKMARK_KIND = 2;
                                         Param.SAVE_MODE = "U";
                                         Global.getCommon().ProgressShow();
@@ -298,7 +305,7 @@ public class LocalboxbannerListActivity extends BaseActivity {
                                         call.enqueue(new Callback<RTN_SAVE_DATA>() {
                                             @Override
                                             public void onResponse(Call<RTN_SAVE_DATA> call, Response<RTN_SAVE_DATA> response) {
-                                                btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_24px);
+                                                btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24px);
                                                 detailData.FAVORITE_YN = true;
                                                 Global.getData().LOCALBOX_FAVORITE_YN = true;
                                                 Global.getCommon().ProgressHide();
