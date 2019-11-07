@@ -9,6 +9,18 @@ android {
             storePassword '111111'
         }
     }
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'x86_64', 'armeabi-v7a', 'armeabi'
+            universalApk false
+        }
+    }
+
+
+
+
     signingConfigs {
         release {
             storeFile file('C:\\Source\\loggalpublish\\loggalApp2.jks') // 기준은 App 폴더 기준이다.
