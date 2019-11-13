@@ -1,12 +1,14 @@
 package com.altsoft.Adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.altsoft.loggalapp.R;
@@ -68,6 +70,11 @@ public class BannerListViewAdapter extends BaseAdapter {
         else {
             ((ImageView) convertView.findViewById(R.id.btnBookmark)).setVisibility(View.GONE);
         }
+
+        if(listViewItem.ITEM_TYPE == 1000) convertView.setBackground(ContextCompat.getDrawable(context,R.drawable.itemborder));
+        else if(listViewItem.ITEM_TYPE == 10000) convertView.setBackground(ContextCompat.getDrawable(context,R.drawable.itemborder2));
+        else if(listViewItem.ITEM_TYPE == 100000) convertView.setBackground(ContextCompat.getDrawable(context,R.drawable.itemborder3));
+
 
         if(listViewItem.FAVORITE_YN) {
             ((ImageView) convertView.findViewById(R.id.btnFavorite)).setVisibility(View.VISIBLE);

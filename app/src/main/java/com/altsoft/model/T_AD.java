@@ -10,6 +10,8 @@ public class T_AD implements Serializable  {
     public Integer BANNER_TYPE;
     /// 콘텐츠 유형(T_COMMON : A008, 1:HTML, 2:서브배너)
     public Integer CONTENT_TYPE;
+    /// 배너가상영역유형(M003) 1000:1km 1000:10km 1000:100km
+    public Integer ITEM_TYPE ;
     /// 광고제목
     public String TITLE;
     /// 광고부제목
@@ -30,24 +32,11 @@ public class T_AD implements Serializable  {
     public Integer MEMBER_CODE ;
     /// 요청자명 T_MEMBER테이블의 MEMBER_CODE
     public String MEMBER_NAME ;
-    /// 대표카테고리코드
-    public Integer REP_CATEGORY_CODE ;
-    /// 대표카테고리명
-    public Integer REP_CATEGORY_NAME ;
-    /// 해당 광고가 있는 기기로 부터 거리
-    public Double DEVICE_DISTANCE ;
     /// 광고로 부터 거리
     public Double AD_DISTANCE ;
-    /// 자신의 위치로 부터 광고장소와 로컬박스위치와 비교하여 가까운곳 거리 리턴
-    public Double DISTANCE ;
+
     /// 사이니지코드
     public Long SIGN_CODE ;
-    /// 사이니지에 등록된 배너코드
-    public Long SIGNAGE_AD_CODE ;
-    /// 비콘 장치번호
-    public String BEACON_DEVICE_NUMBER ;
-    /// 비콘명
-    public String BEACON_NAME ;
     /// 북마크 유무
     public Boolean BOOKMARK_YN;
     /// 좋아요 유무
